@@ -1,0 +1,22 @@
+<h1>Books</h1>
+
+<hr>
+
+<% book_id = params["id"] %>
+<% book = Book.read(book_id) %>
+
+<h2><%= book["title"] %></h2>
+
+<li>Price: $<%= book["price"] %></li>
+<li>Average Star Rating: <% Review.where("book_id" => book["id"]).average("star_rating") %></li>
+
+<p><strong>Reviews:</strong></p>
+
+<% reviews = Review.where("book_id" => book["id"]) %>
+
+<ul>
+  <% all_reviews.each do |review|%>
+    <li><%= review["review"] %></li>
+    }
+  <% end %>
+</ul>

@@ -1,0 +1,39 @@
+<html>
+<head>
+  <style type="text/css">
+  table {
+    border-collapse: collapse;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  </style>
+</head>
+<body>
+  <% all_books = Book.read %>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Average Star Rating</th>
+    </tr>
+    <% all_books.each do |book| %>
+
+      <% average_star_rating = Review.where("title" => book["title"]).average("star_rating") %>
+
+      <tr>
+        <td><a href="/books/show?id=<%= book.id %>"><%= book["title"] %></a></td>
+        <td><%= book["author"] %></td>
+        <td><%= average_star_rating %></td>
+      </tr>
+    <% end %>
+  </table>
+</body>
+
+<% max_star_rating = Review.where("title" => book["title"]).maximum.(average("star_rating")) %>
+
+Editor's Pick: <%= max_star_rating %>
+
+</html>
