@@ -32,8 +32,8 @@
   </table>
 </body>
 
-<% max_star_rating = Review.where("title" => book["title"]).maximum.(average("star_rating")) %>
+<p></p>
 
-Editor's Pick: <%= max_star_rating %>
+Editor's Pick: <%= link_to "The Alchemist", "/books/show?id=11" %>
 
 </html>
